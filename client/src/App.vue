@@ -1,6 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+//// eslint-disable-next-line no-unused-vars
+//const response = await fetch('http://localhost:4000', {
+//  body: {
+//    a: 1,
+//    b: 2
+//  }
+//})
 </script>
 
 <template>
