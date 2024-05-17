@@ -7,8 +7,6 @@ import handleValidationsErrors from './utils/handleValidationsErrors.js'
 import { EventController } from './controllers/index.js'
 import EventRegistration from './models/eventRegistration.model.js'
 
-//import{han}
-
 dotenv.config()
 
 const PORT = 4000
@@ -29,6 +27,7 @@ mongoose
 app.get('/', (req, res) => {
   res.status(200).json('Welcome, your app is working well')
 })
+
 app.get('/events/:eventId/participants', async (req, res) => {
   try {
     const { eventId } = req.params
