@@ -65,6 +65,7 @@ onMounted(async () => {
   if (data.value) {
     events.value = data.value.events
     totalPage.value = data.value.pages
+    page.value++
   }
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
