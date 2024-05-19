@@ -24,10 +24,6 @@ mongoose
     console.log('DB error', err)
   })
 
-app.get('/', (req, res) => {
-  res.status(200).json('Welcome, your app is working well')
-})
-
 app.get('/events/:eventId/participants', async (req, res) => {
   try {
     const { eventId } = req.params
@@ -39,6 +35,7 @@ app.get('/events/:eventId/participants', async (req, res) => {
 })
 
 app.get('/api/events', EventController.getAllEvenets)
+app.get('/api/events/:eventId', EventController.getEventById)
 app.post('/api/events', eventCreateValidation, handleValidationsErrors, EventController.createEvent)
 
 app.post(

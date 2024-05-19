@@ -3,12 +3,42 @@ import EventRegistration from '../models/eventRegistration.model.js'
 
 export const getAllEvenets = async (req, res) => {
   try {
-    const events = await EventModel.find().exec()
-    res.json(events)
+    const page = parseInt(req.query.page) || 1
+    const limit = parseInt(req.query.limit) || 10
+    const skip = (page - 1) * limit
+
+    const events = await EventModel.find().skip(skip).limit(limit).exec()
+    const total = await EventModel.countDocuments()
+
+    res.json({
+      events,
+      total,
+      page,
+      pages: Math.ceil(total / limit)
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({
+      message: 'Failed to get events'
+    })
+  }
+}
+export const getEventById = async (req, res) => {
+  try {
+    const { eventId } = req.params
+    const event = await EventModel.findById(eventId).exec()
+
+    if (!event) {
+      return res.status(404).json({
+        message: 'Event not found'
+      })
+    }
+
+    res.json(event)
   } catch (err) {
     console.log(err)
     res.status(500).json({
-      message: 'Failed to get events'
+      message: 'Failed to get event'
     })
   }
 }

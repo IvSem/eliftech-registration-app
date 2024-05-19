@@ -19,8 +19,12 @@ const EventRegistrationSchema = new Schema({
     required: true
   },
   eventId: {
-    type: Schema.Types.ObjectId, // Зв'язок з ідентифікатором події
-    ref: 'Event' // Вказуємо на колекцію, з якою потрібно зв'язати
+    type: Schema.Types.ObjectId,
+    ref: 'Event'
+  },
+  registrationDate: {
+    type: Date,
+    default: Date.now
   }
 })
 
