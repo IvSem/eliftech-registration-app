@@ -104,55 +104,57 @@ const chartOptions = {
 
 <template>
   <main>
-    <div v-if="loadingEvent" class="mb-10">
-      <div class="animate-pulse h-6 bg-slate-700 dark:bg-slate-400 rounded"></div>
-    </div>
-    <h1 v-else class="font-bold mb-10">"{{ event?.title }}" Event Participants</h1>
+    <section class="py-10">
+      <div v-if="loadingEvent" class="mb-10">
+        <div class="animate-pulse h-6 bg-slate-700 dark:bg-slate-400 rounded"></div>
+      </div>
+      <h1 v-else class="font-bold mb-10">"{{ event?.title }} Event" Participants</h1>
 
-    <div v-if="loading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <EventSkeleton v-for="n in 3" :key="n" />
-    </div>
+      <div v-if="loading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <EventSkeleton v-for="n in 3" :key="n" />
+      </div>
 
-    <div v-if="participants?.length > 0 && !loading">
-      <div class="flex items-center gap-x-4 pb-4">
-        <p>Пошук:</p>
-        <MyInput
-          class="w-full !mt-0"
-          name="searchQuery"
-          type="search"
-          placeholder="Enter query..."
-          v-model="searchQuery"
+      <div v-if="participants?.length > 0 && !loading">
+        <div class="flex items-center gap-x-4 pb-4">
+          <p>Пошук:</p>
+          <MyInput
+            class="w-full !mt-0"
+            name="searchQuery"
+            type="search"
+            placeholder="Enter query..."
+            v-model="searchQuery"
+          />
+        </div>
+
+        <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <li
+            v-for="participant in filteredParticipants"
+            :key="participant._id"
+            class="p-4 bg-slate-200 dark:bg-slate-400 rounded shadow flex flex-col"
+          >
+            <p>{{ participant.fullName }}</p>
+            <p>{{ participant.email }}</p>
+          </li>
+        </ul>
+        <div v-if="filteredParticipants.length === 0">за {{ searchQuery }} нічого не знайдено</div>
+      </div>
+
+      <div class="my-10">
+        <Line
+          v-if="participants?.length > 0 && !loading"
+          :data="registrationData"
+          :options="chartOptions"
+          class="mx-auto !h-[300px]"
         />
       </div>
 
-      <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <li
-          v-for="participant in filteredParticipants"
-          :key="participant._id"
-          class="p-4 bg-slate-200 dark:bg-slate-400 rounded shadow flex flex-col"
+      <div v-if="participants?.length === 0 && !loading" class="flex flex-col items-start">
+        <p>Participants not found...</p>
+
+        <RouterLink :to="`/events/${event?._id}/register`" class="mt-10 bg-cyan-600 p-2 rounded"
+          >Register this event</RouterLink
         >
-          <p>{{ participant.fullName }}</p>
-          <p>{{ participant.email }}</p>
-        </li>
-      </ul>
-      <div v-if="filteredParticipants.length === 0">за {{ searchQuery }} нічого не знайдено</div>
-    </div>
-
-    <div class="my-10">
-      <Line
-        v-if="participants?.length > 0 && !loading"
-        :data="registrationData"
-        :options="chartOptions"
-        class="mx-auto !h-[300px]"
-      />
-    </div>
-
-    <div v-if="participants?.length === 0 && !loading" class="flex flex-col items-start">
-      <p>Participants not found...</p>
-
-      <RouterLink :to="`/events/${event?._id}/register`" class="mt-10 bg-cyan-600 p-2 rounded"
-        >Register this event</RouterLink
-      >
-    </div>
+      </div>
+    </section>
   </main>
 </template>

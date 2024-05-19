@@ -102,7 +102,7 @@ onMounted(async () => {
             <div class="h-4 bg-slate-700 dark:bg-slate-400 rounded w-full"></div>
           </div>
         </div>
-        <p v-else>"{{ event?.title }}" registration</p>
+        <p v-else>"{{ event?.title }} Event" registration</p>
       </div>
 
       <div>
