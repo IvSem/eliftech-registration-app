@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+//axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'https://eliftech-registration-app-backend.vercel.app'
 
 export const useAxios = (url, method = 'get', options = {}) => {
   const data = ref(null)

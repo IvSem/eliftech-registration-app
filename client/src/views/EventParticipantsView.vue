@@ -143,7 +143,7 @@ const chartOptions = {
         v-if="participants?.length > 0 && !loading"
         :data="registrationData"
         :options="chartOptions"
-        class="mx-auto"
+        class="mx-auto !h-[300px]"
       />
     </div>
 
