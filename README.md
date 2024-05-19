@@ -1,16 +1,15 @@
-# ElifTech Registration App
+# ElifTech Events App
 
 ## Overview
 
-The ElifTech Registration App is a web application designed to manage user registrations efficiently. This project demonstrates the use of modern web technologies and follows best practices for development and deployment.
+The ElifTech Events App.
 
 ## Technologies Used
 
 - **Frontend:**
 
   - HTML
-  - CSS
-  - JavaScript (ES6+)
+  - Tailwindcss
   - Vue
 
 - **Backend:**
@@ -21,14 +20,60 @@ The ElifTech Registration App is a web application designed to manage user regis
 - **Database:**
   - MongoDB
 
-## Installation
-
-To run this project locally, follow these steps:
-
 ### Prerequisites
 
 Ensure you have the following installed:
 
 - Node.js
 - npm (Node Package Manager)
-- MongoDB
+
+## Run Locally
+
+Clone this project
+
+### Frontend setup
+
+```bash
+  cd client
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+Сhange the `baseUrl` in the `useAxios.js` file to point to your server API for example:
+`http://localhost:4000`
+
+### Backend setup
+
+```bash
+  cd server
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Create a file named `.env` and add the following variables, replacing the placeholder values with your own:
+
+```env
+  DB_URL=your_mongodb_connection_string
+```
+
+Start the server
+
+```bash
+  npm start
+```
+
+The backend server will start running on `http://localhost:4000`.
